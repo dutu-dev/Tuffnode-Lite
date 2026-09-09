@@ -4,17 +4,17 @@ Official binary distribution repository for **TuffNode Lite**.
 
 ## Download
 
-Download the latest Windows installer from **GitHub Releases**:
+Download the latest Windows release from **GitHub Releases**:
 
 https://github.com/dutu-dev/Tuffnode-Lite/releases/latest
 
-Current target release: **v0.1.0-beta.1**
+Current release: **v0.2.0**
 
 ## What is published here
 
 This repository is intentionally distribution-only.
 
-- Windows installer executables
+- Windows release binaries
 - Release notes
 - Changelog
 - Public release information
@@ -23,47 +23,87 @@ This repository is intentionally distribution-only.
 
 ## About TuffNode Lite
 
-TuffNode Lite is a free Windows application for creating and managing a self-hosted Minecraft server without having to configure everything manually.
+TuffNode Lite is a free Windows application for running and managing one self-hosted Minecraft server through a compact interface.
 
-Lite is designed around a simpler, single-server experience while still exposing the controls normally needed for a home or small friends server.
+v0.2.0 is organized around four areas:
 
-It includes:
+- **Server** — start/stop, telemetry, local/public addresses and quick commands
+- **Console** — live output and direct Minecraft commands
+- **Plugins** — Browse and Installed add-on management
+- **Settings** — real Minecraft server settings plus Lite application settings
 
-- guided Minecraft server setup
-- Paper, Purpur, Vanilla, Spigot, CraftBukkit, Fabric, Forge and NeoForge support
-- managed Java runtime setup
-- configurable RAM and garbage collector settings
-- server start / stop and live console controls
-- plugin browsing through Modrinth, Hangar and SpigotMC-compatible sources
-- local `.jar` plugin import
-- installed plugin enable, disable and uninstall controls
-- player administration including ban, unban, kick, OP and whitelist controls
-- basic server settings such as MOTD, max players, gamemode, difficulty, PvP and distances
-- optional Geyser support for Bedrock connectivity
-- local and public connection information
-- TuffNode Shield posture checks
-- optional TuffNode Sync publication support
+## Server providers
 
-## TuffNode Sync
+TuffNode Lite supports:
 
-Publishing a server to TuffNode Sync is optional.
+- Paper
+- Purpur
+- Vanilla
+- Spigot
+- CraftBukkit
+- Fabric
+- Forge
+- NeoForge
+- Custom .jar
 
-It does not replace normal Minecraft connections and does not automatically change your IP address, firewall configuration, ports or router port forwarding.
+Compatible Java runtimes can be provisioned automatically for managed server types.
 
-The current Lite beta publishes server information to the local TuffNode Sync registry while the wider TuffNode networking stack continues to evolve.
+## Plugins and mods
+
+Plugin-capable servers can browse managed add-ons from:
+
+- Modrinth
+- Hangar
+- SpigotMC
+
+Fabric, Forge and NeoForge use Modrinth for managed mod discovery.
+
+Installed add-ons can be enabled, disabled or removed, and local .jar drag-and-drop is supported.
+
+## Geyser / Bedrock
+
+Geyser is available as a managed add-on on compatible plugin-based Java servers.
+
+When enabled, Lite displays separate local/public Bedrock connection information alongside the normal Java server addresses.
+
+## Server settings
+
+The Settings tab exposes common real server.properties values including:
+
+- MOTD
+- difficulty
+- game mode
+- render distance
+- simulation distance
+- max players
+- port
+- spawn protection
+- online mode
+- PvP
+- whitelist
+- allow flight
+- command blocks
+
+## Windows integration
+
+- Dark and Snow themes
+- 18 UI languages
+- Start with Windows
+- Minimize to tray
+- Safe graceful shutdown when exiting with a running server
+
+## Network note
+
+Public IP discovery is informational. It does not automatically configure router port forwarding, NAT or firewall access.
 
 ## Requirements
 
 - Windows 10 / 11 x64
-- Internet access for downloading Minecraft server software, Java runtimes and add-ons
+- Internet access for downloading Minecraft server software, Java runtimes and managed add-ons
 
-TuffNode Lite can download compatible Java runtimes for managed servers when needed.
+## Release notes
 
-## Distribution
-
-Official TuffNode Lite installers are published through this repository's GitHub Releases page.
-
-The application source code is maintained privately and is not distributed through this repository.
+See [RELEASE_NOTES_v0.2.0.md](RELEASE_NOTES_v0.2.0.md).
 
 ## Changelog
 
@@ -77,10 +117,6 @@ Developed and published by Dutu.
 
 contact@tuffnode.com  
 https://tuffnode.com
-
-## Platform
-
-Windows 10 / 11 x64
 
 ## Trademark / affiliation
 
