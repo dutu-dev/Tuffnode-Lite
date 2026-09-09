@@ -156,7 +156,7 @@ See CHANGELOG.md.
 
 ## Publisher
 
-Developed and published by Dutu.
+Developed and published by **dutu-dev - TuffNode**.
 
 ## Contact
 
