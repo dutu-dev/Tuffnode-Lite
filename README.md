@@ -12,6 +12,10 @@ https://github.com/dutu-dev/Tuffnode-Lite/releases/latest
 
 The official Windows installer is built with **Inno Setup 6**.
 
+Installer filename:
+
+`TuffNode-Lite-v0.2.1.exe`
+
 ## What's new in v0.2.1
 
 v0.2.1 is a focused reliability patch for plugin and mod installation.
@@ -20,6 +24,9 @@ v0.2.1 is a focused reliability patch for plugin and mod installation.
 
 - Fixed Browse showing add-ons while Install could fail on a newly configured server that had not been provisioned yet.
 - Lite can now prepare/provision the server automatically when installing an add-on.
+- Fixed successfully installed add-ons continuing to show **Install** in Browse.
+- Browse now detects the real installed JAR and changes the action to **Installed** automatically.
+- Installed actions are disabled and refresh without requiring an application restart.
 - Local `.jar` import and managed Geyser installation use the same preparation path.
 
 ### Provider reliability
@@ -32,7 +39,7 @@ v0.2.1 is a focused reliability patch for plugin and mod installation.
 - Downloaded add-ons are validated before being placed in the live plugins/mods folder.
 - Provider errors now surface useful details instead of only a generic `Error` message.
 
-See [RELEASE_NOTES_v0.2.1.md](RELEASE_NOTES_v0.2.1.md) for the complete patch notes and [CHANGELOG.md](CHANGELOG.md) for the full product history.
+See [RELEASE_NOTES_v0.2.1.md](RELEASE_NOTES_v0.2.1.md) for the complete patch notes and [CHANGELOG.md](CHANGELOG.md) for the cumulative product history.
 
 ## TuffNode Lite
 
@@ -71,7 +78,7 @@ Plugin-capable servers can browse managed add-ons from:
 
 Fabric, Forge and NeoForge use Modrinth for managed mod discovery.
 
-Installed add-ons can be enabled, disabled or removed, and local `.jar` drag-and-drop is supported.
+Installed add-ons are read from the real server add-on directory. They can be enabled, disabled or removed, and Browse reflects installed state directly. Local `.jar` drag-and-drop is supported.
 
 ## Geyser / Bedrock
 
@@ -118,15 +125,13 @@ The v0.2.1 installer includes:
 7. Installation.
 8. Finish page with optional Launch.
 
-Installer filename:
-
-`TuffNode-Lite-v0.2.1.exe`
+The installer preserves the existing TuffNode Lite product identity, so v0.2.1 upgrades v0.2.0 rather than creating a second installation.
 
 ## What is published here
 
 This repository is intentionally distribution-only.
 
-- Windows release binaries
+- Windows installer binaries through GitHub Releases
 - Release notes
 - Changelog
 - Public release information
@@ -144,7 +149,7 @@ Public IP discovery is informational. It does not automatically configure router
 
 ## Release history
 
-- `v0.2.1` — plugin/mod installation reliability patch
+- `v0.2.1` — plugin/mod installation and installed-state reliability patch
 - `v0.2.0` — compact Lite redesign
 - `v0.1.0-beta.1` — first public beta
 
