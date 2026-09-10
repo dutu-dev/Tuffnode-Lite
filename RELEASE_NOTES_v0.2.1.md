@@ -11,6 +11,14 @@ TuffNode Lite v0.2.1 is a focused reliability patch for plugin and mod installat
 - Local `.jar` drag-and-drop uses the same automatic preparation path.
 - Managed Geyser installation can also prepare the server automatically.
 
+### Installed-state feedback
+
+- Fixed successfully installed add-ons continuing to show **Install** in Plugins → Browse.
+- Browse now reconciles catalog results against the real JAR files present in the active `plugins` / `mods` directory.
+- Installed add-ons switch automatically to **Installed** and the action becomes disabled.
+- Installed-state changes refresh without requiring an application restart.
+- Versioned JAR names such as `PluginName-1.2.3.jar` are recognized when matching installed files to Browse results.
+
 ### Modrinth
 
 - Improved compatible-version resolution by trying server loaders individually in priority order.
@@ -55,8 +63,10 @@ TuffNode Lite v0.2.1 is a focused reliability patch for plugin and mod installat
 
 v0.2.1 keeps the existing TuffNode Lite installer identity, so it can be installed over v0.2.0 as an upgrade.
 
+## Distribution
+
+The official Windows installer is published as a GitHub Release asset in this public distribution repository. The application source code is maintained separately in a private repository and is not distributed here.
+
 ## Note
 
 Automatic installation still depends on the selected Minecraft version, server loader and a downloadable compatible JAR being available from the third-party provider. Premium, external/manual-download or incompatible resources may still require manual `.jar` installation.
-
-The TuffNode Lite application source code is maintained privately and is not distributed in this public repository.
