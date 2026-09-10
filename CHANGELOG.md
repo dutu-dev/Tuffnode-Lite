@@ -4,6 +4,97 @@ This changelog documents the product history of TuffNode Lite. The public distri
 
 ---
 
+## v0.2.1 — 2026-09-10
+
+TuffNode Lite v0.2.1 is a focused reliability patch for the plugin/mod installation workflow introduced in v0.2.0.
+
+The primary issue in v0.2.0 was that add-ons could already be discovered in **Plugins → Browse** before a new server had ever been started, but the Install command required the server profile to already be provisioned. This created a broken state where a user could browse compatible plugins and press Install, but installation would not proceed.
+
+### Plugin installation lifecycle
+
+- Removed the early `IsProvisioned` gate that blocked marketplace installation on newly configured servers.
+- Plugin/mod installation now prepares and provisions the selected Minecraft server automatically when required.
+- The automatic preparation step resolves the server build, Java runtime, server directory and concrete Minecraft version before trying to install an add-on.
+- Normal server startup and add-on installation now share the same provisioning path instead of duplicating the lifecycle logic.
+- Local `.jar` drag-and-drop also uses the automatic preparation path if the server has not yet been provisioned.
+- Managed Geyser installation can now prepare the server automatically instead of requiring the user to start the server first.
+- File-system watching and Installed-list refresh are reinitialized after automatic provisioning so newly installed files appear immediately.
+
+### Minecraft version resolution
+
+- Fixed add-on search behavior when the selected version is `Latest stable` and the server has not yet been provisioned.
+- Lite now resolves a concrete Minecraft release through the server provider catalog before applying compatibility filters.
+- Explicitly selected Minecraft versions continue to be used directly.
+- Changing the configured Minecraft version now triggers a fresh plugin/mod search so the results match the new compatibility target.
+- Custom JAR servers avoid pretending that Lite knows a concrete Minecraft version when one has not been resolved.
+
+### Modrinth reliability
+
+- Reworked Modrinth version resolution to try compatible loaders individually in priority order.
+- Paper servers can fall back across Paper, Spigot and Bukkit-compatible project releases.
+- Purpur servers can fall back across Purpur, Paper, Spigot and Bukkit-compatible project releases.
+- Spigot uses Spigot and Bukkit candidates.
+- CraftBukkit uses Bukkit and Spigot candidates.
+- Fabric, Forge and NeoForge keep their native loader filters.
+- The literal `Latest stable` label is no longer sent to Modrinth as a Minecraft version facet.
+- Version downloads use the concrete Minecraft version actually selected/resolved by Lite.
+- File selection now prefers the provider-designated primary `.jar` and otherwise uses the first valid JAR.
+- Auxiliary files such as sources/Javadocs are ignored for installation.
+
+### HTTP / JAR download pipeline
+
+- Removed the shared global `Accept: application/json` header from the add-on HTTP client.
+- JSON API calls now request `application/json` only on JSON requests.
+- JAR downloads request Java archive / binary content instead of inheriting a JSON-only header.
+- Increased the content-service timeout to better tolerate slower provider/CDN downloads.
+- Downloaded files are validated as ZIP/JAR archives before being moved into the live plugin/mod directory.
+- HTML error pages, proxy responses and other invalid payloads are rejected instead of being left behind with a `.jar` extension.
+- Failed temporary `.download` files are cleaned up automatically.
+- Content-service User-Agent now identifies TuffNode Lite v0.2.1.
+
+### Hangar reliability
+
+- Improved Hangar release selection instead of blindly taking the first returned build.
+- Lite checks Paper platform compatibility metadata where available.
+- Exact Minecraft versions are supported.
+- `.x` compatibility expressions are supported.
+- Simple minimum-to-maximum version ranges are supported.
+- If compatibility metadata is absent or incomplete, Lite falls back to the newest returned release rather than immediately refusing installation.
+
+### SpigotMC / Spiget reliability
+
+- The direct Spiget free-resource download endpoint remains the preferred installation path.
+- Added a metadata-based download fallback when the direct endpoint returns an HTTP error or invalid JAR payload.
+- Search no longer removes otherwise valid free resources solely because Spiget omitted the `file.type` field.
+- Explicit non-JAR resources are still excluded.
+- Premium and external/manual resources remain excluded from automatic installation.
+
+### Error reporting and UX
+
+- Installing from Browse now shows a preparation state while Lite provisions a new server.
+- The status changes to the selected add-on name while the provider download is running.
+- Provider/download exceptions are surfaced in the Plugins view instead of collapsing every failure to a generic `Error` message.
+- Error messages are capped to keep the compact UI usable.
+- Enable/disable, delete, Geyser and several setup/settings operations now retain more actionable error details.
+
+### Release / installer
+
+- Application version updated to `0.2.1`.
+- Assembly and file versions updated to `0.2.1.0`.
+- Inno Setup installer metadata updated to v0.2.1 while retaining the existing `AppId={{TuffNode-Lite}}` for upgrade compatibility.
+- Installer output renamed to `TuffNode-Lite-v0.2.1.exe`.
+- Installer release-notes payload now points to `docs/releases/v0.2.1.md`.
+- `INSTALL-NOTES.txt` now describes the v0.2.1 plugin-installation fixes.
+- Publisher remains `dutu-dev - TuffNode`.
+
+### Compatibility note
+
+- Automatic installation still depends on a third-party provider exposing a downloadable JAR compatible with the selected Minecraft version and loader.
+- Premium, external/manual-download or incompatible resources may still require manual `.jar` installation.
+- Add-on changes generally require a Minecraft server restart before the plugin/mod becomes active.
+
+---
+
 ## v0.2.0 — 2026-09-10
 
 TuffNode Lite v0.2.0 is the first major product-shape refactor after the initial beta. The application moves away from the larger beta dashboard and becomes a compact, single-server Windows control surface focused on fast startup, direct server control, add-on management and the settings most people actually need.
